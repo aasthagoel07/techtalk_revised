@@ -118,9 +118,6 @@
     <Compile Include="Models\tevent.cs">
       <DependentUpon>usermodel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tevent_presenters.cs">
-      <DependentUpon>usermodel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\tevent_users.cs">
       <DependentUpon>usermodel.tt</DependentUpon>
     </Compile>

@@ -17,7 +17,6 @@ namespace techtalk_revised.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tevent()
         {
-            this.tevent_presenters = new HashSet<tevent_presenters>();
             this.tevent_users = new HashSet<tevent_users>();
         }
     
@@ -26,9 +25,9 @@ namespace techtalk_revised.Models
         public string edescription { get; set; }
         public System.DateTime scheduledOn { get; set; }
         public string presentationURL { get; set; }
+        public int userID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tevent_presenters> tevent_presenters { get; set; }
+        public virtual user user { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tevent_users> tevent_users { get; set; }
     }

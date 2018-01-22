@@ -1,13 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="techtalkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="tevent_presenters">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="userID" Type="int" Nullable="false" />
-    <Property Name="eventID" Type="int" Nullable="false" />
-  </EntityType>
   <EntityType Name="tevent_users">
     <Key>
       <PropertyRef Name="tevent_usersID" />
@@ -25,6 +17,7 @@
     <Property Name="edescription" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="scheduledOn" Type="date" Nullable="false" />
     <Property Name="presentationURL" Type="nvarchar" MaxLength="50" />
+    <Property Name="userID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="users">
     <Key>
@@ -37,27 +30,15 @@
     <Property Name="designation" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="isAdmin" Type="bit" Nullable="false" />
   </EntityType>
-  <Association Name="FK_tevent_presenters_tevents">
+  <Association Name="FK_tevent_users_tevents">
     <End Role="tevents" Type="Self.tevents" Multiplicity="1" />
-    <End Role="tevent_presenters" Type="Self.tevent_presenters" Multiplicity="*" />
+    <End Role="tevent_users" Type="Self.tevent_users" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="tevents">
         <PropertyRef Name="eventID" />
       </Principal>
-      <Dependent Role="tevent_presenters">
+      <Dependent Role="tevent_users">
         <PropertyRef Name="eventID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tevent_presenters_users">
-    <End Role="users" Type="Self.users" Multiplicity="1" />
-    <End Role="tevent_presenters" Type="Self.tevent_presenters" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="users">
-        <PropertyRef Name="userID" />
-      </Principal>
-      <Dependent Role="tevent_presenters">
-        <PropertyRef Name="userID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -73,38 +54,33 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_tevents_tevents_users">
-    <End Role="tevents" Type="Self.tevents" Multiplicity="1" />
-    <End Role="tevent_users" Type="Self.tevent_users" Multiplicity="*" />
+  <Association Name="FK_tevents_users">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="tevents" Type="Self.tevents" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="tevents">
-        <PropertyRef Name="eventID" />
+      <Principal Role="users">
+        <PropertyRef Name="userID" />
       </Principal>
-      <Dependent Role="tevent_users">
-        <PropertyRef Name="eventID" />
+      <Dependent Role="tevents">
+        <PropertyRef Name="userID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="techtalkModelStoreContainer">
-    <EntitySet Name="tevent_presenters" EntityType="Self.tevent_presenters" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tevent_users" EntityType="Self.tevent_users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tevents" EntityType="Self.tevents" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_tevent_presenters_tevents" Association="Self.FK_tevent_presenters_tevents">
+    <AssociationSet Name="FK_tevent_users_tevents" Association="Self.FK_tevent_users_tevents">
       <End Role="tevents" EntitySet="tevents" />
-      <End Role="tevent_presenters" EntitySet="tevent_presenters" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tevent_presenters_users" Association="Self.FK_tevent_presenters_users">
-      <End Role="users" EntitySet="users" />
-      <End Role="tevent_presenters" EntitySet="tevent_presenters" />
+      <End Role="tevent_users" EntitySet="tevent_users" />
     </AssociationSet>
     <AssociationSet Name="FK_tevent_users_users" Association="Self.FK_tevent_users_users">
       <End Role="users" EntitySet="users" />
       <End Role="tevent_users" EntitySet="tevent_users" />
     </AssociationSet>
-    <AssociationSet Name="FK_tevents_tevents_users" Association="Self.FK_tevents_tevents_users">
+    <AssociationSet Name="FK_tevents_users" Association="Self.FK_tevents_users">
+      <End Role="users" EntitySet="users" />
       <End Role="tevents" EntitySet="tevents" />
-      <End Role="tevent_users" EntitySet="tevent_users" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

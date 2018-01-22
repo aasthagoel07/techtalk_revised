@@ -25,9 +25,8 @@ namespace techtalk_revised.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tevent_presenters> tevent_presenters { get; set; }
-        public virtual DbSet<tevent_users> tevent_users { get; set; }
         public virtual DbSet<tevent> tevents { get; set; }
         public virtual DbSet<user> users { get; set; }
+        public virtual DbSet<tevent_users> tevent_users { get; set; }
     }
 }

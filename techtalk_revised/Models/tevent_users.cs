@@ -18,7 +18,7 @@ namespace techtalk_revised.Models
         public int userID { get; set; }
         public int eventID { get; set; }
     
-        public virtual user user { get; set; }
         public virtual tevent tevent { get; set; }
+        public virtual user user { get; set; }
     }
 }

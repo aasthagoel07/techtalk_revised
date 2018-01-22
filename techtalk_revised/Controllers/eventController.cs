@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -16,6 +17,15 @@ namespace techtalk_revised.Controllers
     public class eventController : ApiController
     {
         private techtalkEntities db = new techtalkEntities();
+
+        public IQueryable<tevent> GetAllEvent()
+        {
+            
+            var allEvents = from s in db.tevents orderby s.scheduledOn descending select s;
+            return allEvents;
+
+        }
+
         public IQueryable<tevent> GetPastEvent()
         {
             var todaydate = DateTime.Now;
@@ -37,16 +47,18 @@ namespace techtalk_revised.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            db.tevents.Add(eventTable);
+            
+            db.tevents.Add(eventTable);        
+            
 
             try
             {
+               
                 db.SaveChanges();
             }
             catch (DbUpdateException)
             {
-                if (EventTableExists(eventTable.ID))
+                if (EventTableExists(eventTable.eventID))
                 {
                     return Conflict();
                 }
