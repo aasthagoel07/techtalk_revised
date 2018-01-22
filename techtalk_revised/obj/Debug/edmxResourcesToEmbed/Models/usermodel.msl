@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="techtalkModelStoreContainer" CdmEntityContainer="techtalkEntities">
+    <EntitySetMapping Name="tevent_presenters">
+      <EntityTypeMapping TypeName="techtalkModel.tevent_presenters">
+        <MappingFragment StoreEntitySet="tevent_presenters">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="eventID" ColumnName="eventID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tevent_users">
+      <EntityTypeMapping TypeName="techtalkModel.tevent_users">
+        <MappingFragment StoreEntitySet="tevent_users">
+          <ScalarProperty Name="tevent_usersID" ColumnName="tevent_usersID" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="eventID" ColumnName="eventID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tevents">
+      <EntityTypeMapping TypeName="techtalkModel.tevent">
+        <MappingFragment StoreEntitySet="tevents">
+          <ScalarProperty Name="eventID" ColumnName="eventID" />
+          <ScalarProperty Name="ename" ColumnName="ename" />
+          <ScalarProperty Name="edescription" ColumnName="edescription" />
+          <ScalarProperty Name="scheduledOn" ColumnName="scheduledOn" />
+          <ScalarProperty Name="presentationURL" ColumnName="presentationURL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="techtalkModel.user">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="cgicode" ColumnName="cgicode" />
+          <ScalarProperty Name="designation" ColumnName="designation" />
+          <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
