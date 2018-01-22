@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="techtalkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tevent_presenters">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="eventID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tevent_users">
+          <Key>
+            <PropertyRef Name="tevent_usersID" />
+          </Key>
+          <Property Name="tevent_usersID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="eventID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tevents">
+          <Key>
+            <PropertyRef Name="eventID" />
+          </Key>
+          <Property Name="eventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ename" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="edescription" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="scheduledOn" Type="date" Nullable="false" />
+          <Property Name="presentationURL" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="cgicode" Type="nvarchar" MaxLength="7" Nullable="false" />
+          <Property Name="designation" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isAdmin" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tevent_presenters_tevents">
+          <End Role="tevents" Type="Self.tevents" Multiplicity="1" />
+          <End Role="tevent_presenters" Type="Self.tevent_presenters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tevents">
+              <PropertyRef Name="eventID" />
+            </Principal>
+            <Dependent Role="tevent_presenters">
+              <PropertyRef Name="eventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tevent_presenters_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="tevent_presenters" Type="Self.tevent_presenters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="tevent_presenters">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tevent_users_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="tevent_users" Type="Self.tevent_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="tevent_users">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tevents_tevents_users">
+          <End Role="tevents" Type="Self.tevents" Multiplicity="1" />
+          <End Role="tevent_users" Type="Self.tevent_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tevents">
+              <PropertyRef Name="eventID" />
+            </Principal>
+            <Dependent Role="tevent_users">
+              <PropertyRef Name="eventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="techtalkModelStoreContainer">
+          <EntitySet Name="tevent_presenters" EntityType="Self.tevent_presenters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tevent_users" EntityType="Self.tevent_users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tevents" EntityType="Self.tevents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tevent_presenters_tevents" Association="Self.FK_tevent_presenters_tevents">
+            <End Role="tevents" EntitySet="tevents" />
+            <End Role="tevent_presenters" EntitySet="tevent_presenters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tevent_presenters_users" Association="Self.FK_tevent_presenters_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="tevent_presenters" EntitySet="tevent_presenters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tevent_users_users" Association="Self.FK_tevent_users_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="tevent_users" EntitySet="tevent_users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tevents_tevents_users" Association="Self.FK_tevents_tevents_users">
+            <End Role="tevents" EntitySet="tevents" />
+            <End Role="tevent_users" EntitySet="tevent_users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="techtalkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tevent_presenters">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="eventID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tevent" Relationship="Self.FK_tevent_presenters_tevents" FromRole="tevent_presenters" ToRole="tevents" />
+          <NavigationProperty Name="user" Relationship="Self.FK_tevent_presenters_users" FromRole="tevent_presenters" ToRole="users" />
+        </EntityType>
+        <EntityType Name="tevent_users">
+          <Key>
+            <PropertyRef Name="tevent_usersID" />
+          </Key>
+          <Property Name="tevent_usersID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="eventID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="Self.FK_tevent_users_users" FromRole="tevent_users" ToRole="users" />
+          <NavigationProperty Name="tevent" Relationship="Self.FK_tevents_tevents_users" FromRole="tevent_users" ToRole="tevents" />
+        </EntityType>
+        <EntityType Name="tevent">
+          <Key>
+            <PropertyRef Name="eventID" />
+          </Key>
+          <Property Name="eventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="edescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="scheduledOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="presentationURL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tevent_presenters" Relationship="Self.FK_tevent_presenters_tevents" FromRole="tevents" ToRole="tevent_presenters" />
+          <NavigationProperty Name="tevent_users" Relationship="Self.FK_tevents_tevents_users" FromRole="tevents" ToRole="tevent_users" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="cgicode" Type="String" MaxLength="7" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isAdmin" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tevent_presenters" Relationship="Self.FK_tevent_presenters_users" FromRole="users" ToRole="tevent_presenters" />
+          <NavigationProperty Name="tevent_users" Relationship="Self.FK_tevent_users_users" FromRole="users" ToRole="tevent_users" />
+        </EntityType>
+        <Association Name="FK_tevent_presenters_tevents">
+          <End Role="tevents" Type="Self.tevent" Multiplicity="1" />
+          <End Role="tevent_presenters" Type="Self.tevent_presenters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tevents">
+              <PropertyRef Name="eventID" />
+            </Principal>
+            <Dependent Role="tevent_presenters">
+              <PropertyRef Name="eventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tevent_presenters_users">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="tevent_presenters" Type="Self.tevent_presenters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="tevent_presenters">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tevent_users_users">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="tevent_users" Type="Self.tevent_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="tevent_users">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tevents_tevents_users">
+          <End Role="tevents" Type="Self.tevent" Multiplicity="1" />
+          <End Role="tevent_users" Type="Self.tevent_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tevents">
+              <PropertyRef Name="eventID" />
+            </Principal>
+            <Dependent Role="tevent_users">
+              <PropertyRef Name="eventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="techtalkEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tevent_presenters" EntityType="Self.tevent_presenters" />
+          <EntitySet Name="tevent_users" EntityType="Self.tevent_users" />
+          <EntitySet Name="tevents" EntityType="Self.tevent" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK_tevent_presenters_tevents" Association="Self.FK_tevent_presenters_tevents">
+            <End Role="tevents" EntitySet="tevents" />
+            <End Role="tevent_presenters" EntitySet="tevent_presenters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tevent_presenters_users" Association="Self.FK_tevent_presenters_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="tevent_presenters" EntitySet="tevent_presenters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tevent_users_users" Association="Self.FK_tevent_users_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="tevent_users" EntitySet="tevent_users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tevents_tevents_users" Association="Self.FK_tevents_tevents_users">
+            <End Role="tevents" EntitySet="tevents" />
+            <End Role="tevent_users" EntitySet="tevent_users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="techtalkModelStoreContainer" CdmEntityContainer="techtalkEntities">
+          <EntitySetMapping Name="tevent_presenters">
+            <EntityTypeMapping TypeName="techtalkModel.tevent_presenters">
+              <MappingFragment StoreEntitySet="tevent_presenters">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="eventID" ColumnName="eventID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tevent_users">
+            <EntityTypeMapping TypeName="techtalkModel.tevent_users">
+              <MappingFragment StoreEntitySet="tevent_users">
+                <ScalarProperty Name="tevent_usersID" ColumnName="tevent_usersID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="eventID" ColumnName="eventID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tevents">
+            <EntityTypeMapping TypeName="techtalkModel.tevent">
+              <MappingFragment StoreEntitySet="tevents">
+                <ScalarProperty Name="eventID" ColumnName="eventID" />
+                <ScalarProperty Name="ename" ColumnName="ename" />
+                <ScalarProperty Name="edescription" ColumnName="edescription" />
+                <ScalarProperty Name="scheduledOn" ColumnName="scheduledOn" />
+                <ScalarProperty Name="presentationURL" ColumnName="presentationURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="techtalkModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="cgicode" ColumnName="cgicode" />
+                <ScalarProperty Name="designation" ColumnName="designation" />
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

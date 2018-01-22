@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e2c9ab36a7354a91a487e2ad45fba3c7" Name="Diagram1">
+        <EntityTypeShape EntityType="techtalkModel.tevent_presenters" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="techtalkModel.tevent_users" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="techtalkModel.tevent" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="techtalkModel.user" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="techtalkModel.FK_tevent_presenters_tevents" ManuallyRouted="false" />
+        <AssociationConnector Association="techtalkModel.FK_tevent_presenters_users" ManuallyRouted="false" />
+        <AssociationConnector Association="techtalkModel.FK_tevent_users_users" ManuallyRouted="false" />
+        <AssociationConnector Association="techtalkModel.FK_tevents_tevents_users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
