@@ -4,10 +4,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using techtalk_revised.Models;
+
 
 namespace techtalk_revised.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class userController : ApiController
     {
         //Db entity

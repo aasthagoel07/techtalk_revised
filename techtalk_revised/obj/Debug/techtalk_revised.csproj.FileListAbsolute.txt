@@ -19,3 +19,6 @@ C:\Users\zeeshan.abedin\source\repos\techtalk_revised\techtalk_revised\obj\Debug
 C:\Users\zeeshan.abedin\source\repos\techtalk_revised\techtalk_revised\obj\Debug\techtalk_revised.csproj.CoreCompileInputs.cache
 C:\Users\zeeshan.abedin\source\repos\techtalk_revised\techtalk_revised\obj\Debug\techtalk_revised.dll
 C:\Users\zeeshan.abedin\source\repos\techtalk_revised\techtalk_revised\obj\Debug\techtalk_revised.pdb
+C:\Users\zeeshan.abedin\source\repos\techtalk_revised\techtalk_revised\bin\System.Web.Cors.dll
+C:\Users\zeeshan.abedin\source\repos\techtalk_revised\techtalk_revised\bin\System.Web.Http.Cors.dll
+C:\Users\zeeshan.abedin\source\repos\techtalk_revised\techtalk_revised\bin\System.Web.Http.Cors.xml
