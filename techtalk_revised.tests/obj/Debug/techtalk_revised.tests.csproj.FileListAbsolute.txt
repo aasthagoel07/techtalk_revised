@@ -1,0 +1,2 @@
+C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised.tests\obj\Debug\techtalk_revised.tests.csprojResolveAssemblyReference.cache
+C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised.tests\obj\Debug\techtalk_revised.tests.csproj.CoreCompileInputs.cache
