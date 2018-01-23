@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -16,15 +17,42 @@ namespace techtalk_revised.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class eventController : ApiController
     {
+        [HttpGet]
+        public JArray GetAllEvents()
+        {
+            List<tevent> categories = db.tevents.ToList();
+            JArray array = new JArray();
+
+            foreach (var category in categories)
+            {
+                JObject obj = new JObject();
+                obj["eventid"] = category.eventID;
+                obj["ename"] = category.ename;
+                obj["edate"] = category.scheduledOn;
+                obj["edes"] = category.edescription;
+                obj["eurl"] = category.presentationURL;
+                obj["userid"] = category.userID;
+                array.Add(obj);
+            }
+
+            return array;
+
+        }
+
         private techtalkEntities db = new techtalkEntities();
 
-        public IQueryable<tevent> GetAllEvent()
+        /*public IQueryable<tevent> GetAllEvent()
         {
-            
+
+         
+        
+        
+
+
             var allEvents = from s in db.tevents orderby s.scheduledOn descending select s;
             return allEvents;
 
-        }
+        }*/
 
         public IQueryable<tevent> GetPastEvent()
         {
