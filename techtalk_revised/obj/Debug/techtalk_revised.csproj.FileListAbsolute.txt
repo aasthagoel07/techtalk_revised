@@ -28,7 +28,10 @@ C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\
 C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\EntityFramework.dll
 C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\EntityFramework.SqlServer.dll
 C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\Microsoft.IdentityModel.Logging.dll
+C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\Microsoft.IdentityModel.Tokens.dll
 C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\Newtonsoft.Json.dll
+C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\System.Net.Http.Formatting.dll
 C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\System.Web.Cors.dll
 C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\System.Web.Http.Cors.dll
@@ -37,8 +40,11 @@ C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\
 C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\EntityFramework.xml
 C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\EntityFramework.SqlServer.xml
 C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\System.Web.Http.Cors.xml
+C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\Microsoft.IdentityModel.Logging.xml
+C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\Microsoft.IdentityModel.Tokens.xml
 C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\Newtonsoft.Json.xml
+C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\System.Web.Http.Cors.xml
 C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\System.Net.Http.Formatting.xml
 C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\System.Web.Http.xml
 C:\Users\aastha.goel\source\repos\techtalk_revised_backend\techtalk_revised\bin\System.Web.Http.WebHost.xml

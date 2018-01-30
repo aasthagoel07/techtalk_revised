@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using techtalk_revised.Models;
+using Newtonsoft.Json.Linq;
 
 
 namespace techtalk_revised.Controllers
@@ -16,7 +17,7 @@ namespace techtalk_revised.Controllers
         //Db entity
         private techtalkEntities db = new techtalkEntities();
         [HttpPost]
-        public IQueryable<user> LoginCheck(user user)
+        public IHttpActionResult LoginCheck(user user)
         {
             user foundUser = db.users.Where(a => a.username.Equals(user.username)&& user.password.Equals(user.password)).FirstOrDefault();
             if (foundUser == null)
@@ -25,10 +26,10 @@ namespace techtalk_revised.Controllers
             {
 
                 if (foundUser.isAdmin == true)
-                    return db.users.Where(a => a.isAdmin.Equals(true));
+                    return Ok(true);
                 else
                     if(foundUser.isAdmin == false)
-                    return db.users.Where(a => a.isAdmin.Equals(false));
+                    return Ok(false);
                 else
                     return null;
             }
@@ -39,9 +40,22 @@ namespace techtalk_revised.Controllers
         //GET all users
         [HttpGet]
 
-        public IHttpActionResult getUsers()
+        public JArray getUsers()
         {
-            return Ok(db.users);
+            List<user> categories = db.users.ToList();
+            JArray array = new JArray();
+
+            foreach (var category in categories)
+            {
+                JObject obj = new JObject();
+                obj["userid"] = category.userID;
+                obj["uname"] = category.username;
+                obj["designation"] = category.designation;
+                obj["cgicode"] = category.cgicode;
+                array.Add(obj);
+            }
+
+            return array;
         }
 
         //GET users via ID

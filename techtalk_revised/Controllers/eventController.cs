@@ -19,10 +19,7 @@ namespace techtalk_revised.Controllers
     public class eventController : ApiController
     {
         private techtalkEntities db = new techtalkEntities();
-        public eventController() { }
-
-       
-
+        
         [HttpGet]
         public JArray GetAllEvents()
         {
@@ -100,6 +97,22 @@ namespace techtalk_revised.Controllers
             return upcomingEvents;
 
         }
+
+        [HttpPut]
+        public IHttpActionResult updateEvent(int id, tevent ev)
+        {
+
+            var entity = db.tevents.FirstOrDefault(e => e.eventID == id);
+            entity.ename = ev.ename;
+            entity.edescription = ev.edescription;
+            entity.scheduledOn = ev.scheduledOn;
+            entity.userID = entity.userID;
+            db.SaveChanges();
+            return Ok();
+
+        }
+
+
         [ResponseType(typeof(tevent))]
         public IHttpActionResult PostEventTable(tevent eventTable)
         {
@@ -130,33 +143,32 @@ namespace techtalk_revised.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = eventTable.eventID }, eventTable);
         }
-        public IHttpActionResult PostEventUser(tevent_users eventUser)
+
+        [HttpPost]
+        public int getusername(user user)
         {
+            var a = (from s in db.users where user.username == s.username orderby s.userID select s.userID).FirstOrDefault();
+           
+            return a;
+
+        }
+        [HttpPost]
+        public IHttpActionResult PostEventUser(tevent_users teuser)
+        { 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            db.tevent_users.Add(eventUser);
+            //var a = from s in db.users where user.username == s.username orderby s.userID select s.userID;
 
+            //tevent_users euser = new tevent_users();
+            //euser.userID = Convert.ToInt32(a.FirstOrDefault());
+            //euser.eventID = Convert.ToInt32(id);
+            db.tevent_users.Add(teuser);
 
-            try
-            {
+            db.SaveChanges();
 
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (EventTableExists(eventUser.eventID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = eventUser.eventID }, eventUser);
+            return Ok();
         }
 
         // PUT: api/EventTables/5
