@@ -16,6 +16,7 @@
     <EntitySetMapping Name="users">
       <EntityTypeMapping TypeName="techtalkModel.user">
         <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="userID" ColumnName="userID" />
           <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="password" ColumnName="password" />

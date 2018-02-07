@@ -19,7 +19,7 @@ namespace techtalk_revised.Controllers
         [HttpPost]
         public IHttpActionResult LoginCheck(user user)
         {
-            user foundUser = db.users.Where(a => a.username.Equals(user.username)&& user.password.Equals(user.password)).FirstOrDefault();
+            user foundUser = db.users.Where(a => a.username.Equals(user.username)&& a.password.Equals(user.password)).FirstOrDefault();
             if (foundUser == null)
                 return null;
             else
@@ -49,6 +49,7 @@ namespace techtalk_revised.Controllers
             {
                 JObject obj = new JObject();
                 obj["userid"] = category.userID;
+                obj["name"] = category.name;
                 obj["uname"] = category.username;
                 obj["designation"] = category.designation;
                 obj["cgicode"] = category.cgicode;
@@ -60,16 +61,39 @@ namespace techtalk_revised.Controllers
 
         //GET users via ID
         [HttpGet]
-        public IHttpActionResult getUsers(int id)
+        public String getUsersById(int id)
         {
-            user userID = db.users.Find(id);
-            if(userID == null)
+            //user userID = db.users.Find(id);
+            //if(userID == null)
+            //{
+            //    return NotFound();
+            //}
+            //return Ok(db.users);
+            user userfound = db.users.Find(id);
+            if (userfound == null)
             {
-                return NotFound();
+                BadRequest();
             }
-            return Ok(db.users);
+
+            var selectedAll = (from s in db.users where s.userID == id select s.name).FirstOrDefault();
+            return selectedAll;
+            //List<user> userList = selectedAll.ToList();
+            //JArray array = new JArray();
+            //foreach (var ulist in userList)
+            //{
+            //    JObject obj = new JObject();
+            //    obj["userid"] = ulist.userID;
+            //    obj["name"] = ulist.name;
+            //    obj["uname"] = ulist.username;
+            //    obj["designation"] = ulist.designation;
+            //    obj["cgicode"] = ulist.cgicode;
+            //    array.Add(obj);
+            //}
+
+            //return array;
+
         }
-       
+
         //POST Insert User
         [HttpPost]
 

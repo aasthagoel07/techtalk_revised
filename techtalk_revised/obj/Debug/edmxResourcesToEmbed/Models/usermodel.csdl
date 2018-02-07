@@ -25,6 +25,7 @@
     <Property Name="isAdmin" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="tevents" Relationship="techtalkModel.FK_tevents_users" FromRole="user" ToRole="tevent" />
     <NavigationProperty Name="tevent_users" Relationship="techtalkModel.FK_tevent_users_users" FromRole="user" ToRole="tevent_users" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityContainer Name="techtalkEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="tevents" EntityType="Self.tevent" />

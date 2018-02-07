@@ -60,7 +60,7 @@ namespace techtalk_revised.Controllers
                 obj["ename"] = elist.ename;
                 obj["edate"] = elist.scheduledOn;
                 obj["edes"] = elist.edescription;
-                obj["uid"] = elist.userID;
+                obj["userid"] = elist.userID;
                 array.Add(obj);
             }
 
@@ -83,21 +83,54 @@ namespace techtalk_revised.Controllers
 
         }*/
 
-        public IQueryable<tevent> GetPastEvent()
+        public int[] GetPastEvent()
         {
             var todaydate = DateTime.Now;
-            var pastEvents = from s in db.tevents where s.scheduledOn < todaydate orderby s.scheduledOn descending select s;
+            var pastEvents = (from s in db.tevents where s.scheduledOn < todaydate orderby s.scheduledOn ascending select s.eventID).ToArray();
             return pastEvents;
 
         }
-        public IQueryable<tevent> GetUpcomingEvent()
+        public int[] GetUpcomingEvent()
         {
             var todaydate = DateTime.Now;
-            var upcomingEvents = from s in db.tevents where s.scheduledOn > todaydate orderby s.scheduledOn descending select s;
+            var upcomingEvents = (from s in db.tevents where s.scheduledOn > todaydate orderby s.scheduledOn ascending select s.eventID).ToArray();
             return upcomingEvents;
 
         }
 
+        public string fetchupcoming(int eventid)
+        {
+            var todaydate = DateTime.Now;
+            tevent eventfound = db.tevents.Find(eventid);
+            if (eventfound == null)
+            {
+                return null;
+            }
+            else
+            {
+                var upcomingEvents = (from s in db.tevents where s.scheduledOn > todaydate && s.eventID==eventid orderby s.scheduledOn ascending select s.ename).FirstOrDefault();
+                return upcomingEvents;
+            }
+        }
+        public string fetchpast(int eventid)
+        {
+            var todaydate = DateTime.Now;
+            tevent eventfound = db.tevents.Find(eventid);
+            if (eventfound == null)
+            {
+                return null;
+            }
+            else
+            {
+                var upcomingEvents = (from s in db.tevents where s.scheduledOn < todaydate && s.eventID == eventid orderby s.scheduledOn ascending select s.ename).FirstOrDefault();
+                return upcomingEvents;
+            }
+        }
+        public int[] fetcheid(int uid)
+        {
+            var s = (from e in db.tevent_users where e.userID == uid select e.eventID).ToArray();
+            return s;
+        }
         [HttpPut]
         public IHttpActionResult updateEvent(int id, tevent ev)
         {
@@ -224,6 +257,44 @@ namespace techtalk_revised.Controllers
         {
             return db.tevents.Count(e => e.eventID == id) > 0;
         }
-        
+        private bool EventUserExists(int id)
+        {
+            return db.tevent_users.Count(e => e.eventID == id) > 0;
+        }
+        public IHttpActionResult geteventname(int uid)
+        {
+            var id = fetcheid(uid);
+            List<String> events=new List<String>();
+            int len = id.Length;
+            for (int i=0;i<len;i++)
+            {
+                String s = fetchupcoming(id[i]);
+                if (s == null)
+                    continue;
+                else
+                    events.Add(s);
+            }            
+            return ResponseMessage(Request.CreateResponse(HttpStatusCode.Accepted, events));
+        }
+        public IHttpActionResult geteventnamep(int uid)
+        {
+            var id = fetcheid(uid);
+            List<String> events = new List<String>();
+            int len = id.Length;
+            for (int i = 0; i < len; i++)
+            {
+                String s = fetchpast(id[i]);
+                if (s == null)
+                    continue;
+                else
+                    events.Add(s);
+            }
+            return ResponseMessage(Request.CreateResponse(HttpStatusCode.Accepted, events));
+        }
+        public IHttpActionResult getpresentedevent(int uid)
+        {
+            var even = (from s in db.tevents where s.userID == uid select s.ename).ToList<string>();
+            return ResponseMessage(Request.CreateResponse(HttpStatusCode.Accepted, even));
+        }
     }
 }

@@ -29,24 +29,13 @@
             <PropertyRef Name="userID" />
           </Key>
           <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="password" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="cgicode" Type="nvarchar" MaxLength="7" Nullable="false" />
           <Property Name="designation" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="isAdmin" Type="bit" Nullable="false" />
         </EntityType>
-        <Association Name="FK_tevent_users_tevents">
-          <End Role="tevents" Type="Self.tevents" Multiplicity="1" />
-          <End Role="tevent_users" Type="Self.tevent_users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tevents">
-              <PropertyRef Name="eventID" />
-            </Principal>
-            <Dependent Role="tevent_users">
-              <PropertyRef Name="eventID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tevent_users_users">
           <End Role="users" Type="Self.users" Multiplicity="1" />
           <End Role="tevent_users" Type="Self.tevent_users" Multiplicity="*" />
@@ -56,6 +45,18 @@
             </Principal>
             <Dependent Role="tevent_users">
               <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tevents_tevents_users">
+          <End Role="tevents" Type="Self.tevents" Multiplicity="1" />
+          <End Role="tevent_users" Type="Self.tevent_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tevents">
+              <PropertyRef Name="eventID" />
+            </Principal>
+            <Dependent Role="tevent_users">
+              <PropertyRef Name="eventID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -75,12 +76,12 @@
           <EntitySet Name="tevent_users" EntityType="Self.tevent_users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tevents" EntityType="Self.tevents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_tevent_users_tevents" Association="Self.FK_tevent_users_tevents">
-            <End Role="tevents" EntitySet="tevents" />
-            <End Role="tevent_users" EntitySet="tevent_users" />
-          </AssociationSet>
           <AssociationSet Name="FK_tevent_users_users" Association="Self.FK_tevent_users_users">
             <End Role="users" EntitySet="users" />
+            <End Role="tevent_users" EntitySet="tevent_users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tevents_tevents_users" Association="Self.FK_tevents_tevents_users">
+            <End Role="tevents" EntitySet="tevents" />
             <End Role="tevent_users" EntitySet="tevent_users" />
           </AssociationSet>
           <AssociationSet Name="FK_tevents_users" Association="Self.FK_tevents_users">
@@ -117,6 +118,7 @@
           <Property Name="isAdmin" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tevents" Relationship="techtalkModel.FK_tevents_users" FromRole="user" ToRole="tevent" />
           <NavigationProperty Name="tevent_users" Relationship="techtalkModel.FK_tevent_users_users" FromRole="user" ToRole="tevent_users" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityContainer Name="techtalkEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tevents" EntityType="Self.tevent" />
@@ -202,6 +204,7 @@
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="techtalkModel.user">
               <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="userID" ColumnName="userID" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="password" ColumnName="password" />

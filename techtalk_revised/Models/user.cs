@@ -27,6 +27,7 @@ namespace techtalk_revised.Models
         public string cgicode { get; set; }
         public string designation { get; set; }
         public bool isAdmin { get; set; }
+        public string name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tevent> tevents { get; set; }
